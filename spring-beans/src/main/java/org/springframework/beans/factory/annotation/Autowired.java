@@ -23,6 +23,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * Autowired 注解可以同时标注在属性，方法，参数，构造器的位置上
+ * 如果标注在setter方法上，只能用于setter方法的方法声明上，但是不能放在参数位置。
+ * 如果标注在@Bean对应的方法上，可以放在方法声明上，也可以放在参数位置
+ * 此时的@Autowired注解还可以省略
+ * 如果标记在构造方法上，此时也可以同时标注于构造方法声明上或者构造方法的参数位置
+ * Autowired注解也可以省略，但是省略的前提是只有一个带参构造方法，
+ * 如果有多个带参构造方法，不标注@Autowired将会抛出BeanInstantiationException异常
+ * 标注在参数位置，可以放在构造方法的参数位置，或者@Bean标注的方法的参数位置
+ *
  * Marks a constructor, field, setter method, or config method as to be autowired by
  * Spring's dependency injection facilities. This is an alternative to the JSR-330
  * {@link javax.inject.Inject} annotation, adding required-vs-optional semantics.
@@ -104,6 +113,8 @@ import java.lang.annotation.Target;
 public @interface Autowired {
 
 	/**
+	 * 表示待装配的 Bean 是否必须，默认为 true
+     * 如果要装配的 Bean 不存在，会抛出异常
 	 * Declares whether the annotated dependency is required.
 	 * <p>Defaults to {@code true}.
 	 */

@@ -219,6 +219,10 @@ import org.springframework.core.annotation.AliasFor;
 public @interface Bean {
 
 	/**
+	 * 用来指定 bean 的名称，当声明 bean 的名称时没有指定属性名，将会使用该属性
+	 * 例如：@Bean("customBeanName")
+	 * Alias For 表示的是 name 和 value 互为别名，指定 name 或者 value 都可以
+	 *
 	 * Alias for {@link #name}.
 	 * <p>Intended to be used when no other attributes are needed, for example:
 	 * {@code @Bean("customBeanName")}.
@@ -229,6 +233,8 @@ public @interface Bean {
 	String[] value() default {};
 
 	/**
+	 * 用来表示 bean 的名称，可以在 @Bean 中显示使用该属性指定 bean 的名称
+	 *
 	 * The name of this bean, or if several names, a primary bean name plus aliases.
 	 * <p>If left unspecified, the name of the bean is the name of the annotated method.
 	 * If specified, the method name is ignored.
@@ -240,6 +246,9 @@ public @interface Bean {
 	String[] name() default {};
 
 	/**
+	 * bean 的自动注入模型，包括三种：不自动注入，按类型注入，按名称注入
+	 * 逐步废弃掉，不建议使用的属性
+	 *
 	 * Are dependencies to be injected via convention-based autowiring by name or type?
 	 * <p>Note that this autowire mode is just about externally driven autowiring based
 	 * on bean property setter methods by convention, analogous to XML bean definitions.
@@ -255,6 +264,10 @@ public @interface Bean {
 	Autowire autowire() default Autowire.NO;
 
 	/**
+	 * 表示是否使用候选 bean，使用了 autowired 指定了自动注入模式的 bean
+	 * 在 spring 实例化 bean 的时候就会去查找这些标记了自动注入的 bean，这些 bean 就是候选 bean
+	 * 此处可以设置是否在初始化时使用这些候选 bean，默认是使用
+	 *
 	 * Is this bean a candidate for getting autowired into some other bean?
 	 * <p>Default is {@code true}; set this to {@code false} for internal delegates
 	 * that are not meant to get in the way of beans of the same type in other places.
@@ -263,6 +276,9 @@ public @interface Bean {
 	boolean autowireCandidate() default true;
 
 	/**
+	 * 指定 bean 的初始化方法，为某一个 bean 中的一个方法名，不受修饰符的限制，可以为 private 或者 final 修饰
+	 * 在 bean 实例化及属性赋值完成之后会执行
+	 *
 	 * The optional name of a method to call on the bean instance during initialization.
 	 * Not commonly used, given that the method may be called programmatically directly
 	 * within the body of a Bean-annotated method.
@@ -273,6 +289,9 @@ public @interface Bean {
 	String initMethod() default "";
 
 	/**
+	 * 指定 bean 的自动销毁方法，在 bean 的生命周期完成之后【即：调用容器的 close 方法时】
+	 * 同样不受修饰符的限制，会自动执行
+	 *
 	 * The optional name of a method to call on the bean instance upon closing the
 	 * application context, for example a {@code close()} method on a JDBC
 	 * {@code DataSource} implementation, or a Hibernate {@code SessionFactory} object.

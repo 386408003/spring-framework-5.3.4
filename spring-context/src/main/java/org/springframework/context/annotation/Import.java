@@ -56,6 +56,8 @@ import java.lang.annotation.Target;
 public @interface Import {
 
 	/**
+	 * 待注入的组件对应的 class 类
+	 *
 	 * {@link Configuration @Configuration}, {@link ImportSelector},
 	 * {@link ImportBeanDefinitionRegistrar}, or regular component classes to import.
 	 */

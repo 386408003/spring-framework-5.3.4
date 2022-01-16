@@ -23,6 +23,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * ElementType.TYPE			标注在类上
+ * ElementType.METHOD		标注在方法上
+ * ElementType.CONSTRUCTOR	标注在构造函数上
+ * ElementType.PARAMETER	标注在参数上
+ * ElementType.FIELD		标注在成员变量上
+ *
  * Indicates whether a bean is to be lazily initialized.
  *
  * <p>May be used on any class directly or indirectly annotated with {@link
@@ -62,6 +68,9 @@ import java.lang.annotation.Target;
 public @interface Lazy {
 
 	/**
+	 * 标记是否为懒加载，默认值为 true
+	 * 所以可以直接标注注解，不指定 value 属性
+	 *
 	 * Whether lazy initialization should occur.
 	 */
 	boolean value() default true;

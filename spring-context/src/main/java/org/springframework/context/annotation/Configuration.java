@@ -425,6 +425,9 @@ import org.springframework.stereotype.Component;
 public @interface Configuration {
 
 	/**
+	 * 该 value 属性一般不需要指定，表示当前注解继承过来的注解，使用该注解标注在类上之后
+	 * 该注解就有了 @Component 注解的作用，将标注的类作为一个组件
+	 *
 	 * Explicitly specify the name of the Spring bean definition associated with the
 	 * {@code @Configuration} class. If left unspecified (the common case), a bean
 	 * name will be automatically generated.

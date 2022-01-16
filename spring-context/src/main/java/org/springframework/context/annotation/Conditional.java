@@ -62,6 +62,8 @@ import java.lang.annotation.Target;
 public @interface Conditional {
 
 	/**
+	 * 指定注入 bean 时使用的条件类，这个类需要自定义，并且实现 Condition 接口
+	 *
 	 * All {@link Condition} classes that must {@linkplain Condition#matches match}
 	 * in order for the component to be registered.
 	 */

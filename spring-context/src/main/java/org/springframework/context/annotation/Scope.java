@@ -64,6 +64,8 @@ import org.springframework.core.annotation.AliasFor;
 public @interface Scope {
 
 	/**
+	 * bean 的作用域，和 scopeName 互为别名
+	 *
 	 * Alias for {@link #scopeName}.
 	 * @see #scopeName
 	 */
@@ -71,6 +73,13 @@ public @interface Scope {
 	String value() default "";
 
 	/**
+	 * bean 的作用域，和 value 互为别名
+     * Spring 的 Bean 作用域有四种：
+     * SCOPE_PROTOTYPE: 多实例，每次获取，都会生成一个新实例
+     * SCOPE_SINGLETON: 单实例，多次获取到的都是一个实例
+     * SCOPE_REQUEST: web 中，每次请求会生成一个实例
+     * SCOPE_SESSION: web 中，同一个会话中多次获取到的是同一个实例
+	 *
 	 * Specifies the name of the scope to use for the annotated component/bean.
 	 * <p>Defaults to an empty string ({@code ""}) which implies
 	 * {@link ConfigurableBeanFactory#SCOPE_SINGLETON SCOPE_SINGLETON}.
@@ -85,6 +94,10 @@ public @interface Scope {
 	String scopeName() default "";
 
 	/**
+	 * 用于指定 Spring 在某些作用域生成代理 bean 时，创建代理的方式，默认是不创建代理
+     * INTERFACES 表示使用 JDK 生成代理，需要代理类去实现接口
+	 * TARGET_CLASS 表示使用 CGLIB 生成代理
+	 *
 	 * Specifies whether a component should be configured as a scoped proxy
 	 * and if so, whether the proxy should be interface-based or subclass-based.
 	 * <p>Defaults to {@link ScopedProxyMode#DEFAULT}, which typically indicates
