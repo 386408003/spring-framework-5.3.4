@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 @Configuration
 @ComponentScan(basePackages = "top.hkyzf.spring.beans")
-public class TestConfig {
+public class ConfigTest {
 	@Bean
 	public String name() {
 		return "Hello Spring.";
